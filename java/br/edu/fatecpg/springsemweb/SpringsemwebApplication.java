@@ -4,11 +4,15 @@ import br.edu.fatecpg.springsemweb.service.ConsomeApi;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class SpringsemwebApplication implements CommandLineRunner {
+
+	Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringsemwebApplication.class, args);
@@ -19,9 +23,13 @@ public class SpringsemwebApplication implements CommandLineRunner {
 		System.out.println("Bem-vindo ao sistema de consulta FIPE!");
 
 		try {
-			// Exemplo: Consultar o preço de um carro (Fiat Argo 2025)
-			String modeloPreco = ConsomeApi.obterModeloPreco("21", "10392", "2025-1");
-			System.out.println("Preço do carro: " + modeloPreco);
+			String url = "https://parallelum.com.br/fipe/api/v1/carros/marcas";
+			ConsomeApi.obterMarcas(url);
+
+			System.out.print("\nDigite o Código da Marca desejada: ");
+			String codMarca = scan.nextLine();
+
+			ConsomeApi.obterModelos(codMarca);
 
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();

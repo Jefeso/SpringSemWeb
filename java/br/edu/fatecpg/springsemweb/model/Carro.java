@@ -1,31 +1,18 @@
 package br.edu.fatecpg.springsemweb.model;
 
 public class Carro {
-    private int tipoVeiculo;
-    private String valor;
+    private String codigoFipe;
     private String marca;
     private String modelo;
     private int anoModelo;
-    private String combustivel;
-    private String codigoFipe;
-    private String mesReferencia;
-    private String siglaCombustivel;
 
     // Getters e Setters
-    public int getTipoVeiculo() {
-        return tipoVeiculo;
+    public String getCodigoFipe() {
+        return codigoFipe;
     }
 
-    public void setTipoVeiculo(int tipoVeiculo) {
-        this.tipoVeiculo = tipoVeiculo;
-    }
-
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
+    public void setCodigoFipe(String codigoFipe) {
+        this.codigoFipe = codigoFipe;
     }
 
     public String getMarca() {
@@ -52,50 +39,13 @@ public class Carro {
         this.anoModelo = anoModelo;
     }
 
-    public String getCombustivel() {
-        return combustivel;
-    }
-
-    public void setCombustivel(String combustivel) {
-        this.combustivel = combustivel;
-    }
-
-    public String getCodigoFipe() {
-        return codigoFipe;
-    }
-
-    public void setCodigoFipe(String codigoFipe) {
-        this.codigoFipe = codigoFipe;
-    }
-
-    public String getMesReferencia() {
-        return mesReferencia;
-    }
-
-    public void setMesReferencia(String mesReferencia) {
-        this.mesReferencia = mesReferencia;
-    }
-
-    public String getSiglaCombustivel() {
-        return siglaCombustivel;
-    }
-
-    public void setSiglaCombustivel(String siglaCombustivel) {
-        this.siglaCombustivel = siglaCombustivel;
-    }
-
     @Override
     public String toString() {
         return "Carro{" +
-                "tipoVeiculo=" + tipoVeiculo +
-                ", valor='" + valor + '\'' +
+                "codigoFipe='" + codigoFipe + '\'' +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", anoModelo=" + anoModelo +
-                ", combustivel='" + combustivel + '\'' +
-                ", codigoFipe='" + codigoFipe + '\'' +
-                ", mesReferencia='" + mesReferencia + '\'' +
-                ", siglaCombustivel='" + siglaCombustivel + '\'' +
                 '}';
     }
 }

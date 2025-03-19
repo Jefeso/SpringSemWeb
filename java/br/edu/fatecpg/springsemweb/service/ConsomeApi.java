@@ -1,5 +1,8 @@
 package br.edu.fatecpg.springsemweb.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,7 +12,7 @@ import java.net.http.HttpResponse;
 public class ConsomeApi {
 
     private static final HttpClient client = HttpClient.newHttpClient();
-    
+
     public static String obterDados(String url) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -18,9 +21,28 @@ public class ConsomeApi {
         return response.body();
     }
 
+    public static void obterMarcas(String url) throws IOException, InterruptedException {
+        String jsonResponse = obterDados(url);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(jsonResponse);
 
-    public static String obterModeloPreco(String marcaCodigo, String modeloCodigo, String anoModelo) throws IOException, InterruptedException {
-        String url = "https://fipe.parallelum.com.br/api/v1/carros/marcas/" + marcaCodigo + "/modelos/" + modeloCodigo + "/anos/" + anoModelo;
-        return obterDados(url);
+        for (JsonNode node : rootNode) {
+            String codigo = node.path("codigo").asText();
+            String nome = node.path("nome").asText();
+            System.out.println("ID: " + codigo + ", Nome: " + nome);
+        }
+    }
+
+    public static void obterModelos(String marcaCodigo) throws IOException, InterruptedException {
+        String urlModelos = "https://parallelum.com.br/fipe/api/v1/carros/marcas/" + marcaCodigo + "/modelos";
+        String modelosJson = obterDados(urlModelos);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(modelosJson);
+
+        for (JsonNode node : rootNode) {
+            String codigo = node.path("codigo").asText();
+            String nome = node.path("nome").asText();
+            System.out.println("ID: " + codigo + ", Nome: " + nome);
+        }
     }
 }
